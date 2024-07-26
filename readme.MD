@@ -157,7 +157,6 @@ The Research-Analysist project is divided into two main components:
 | **ContextTask**       | Generates a structured index of main topics and subtopics based on the research data. |
 | **SummaryTask**       | Generates a brief and concise summary for the main topic, including the subtopics. |
 | **DetailTask**        | Produces detailed content for a subtopic on the main topic.                 |
-Certainly! Below is a more concise version of the To-Do List section.
 
 ---
 
