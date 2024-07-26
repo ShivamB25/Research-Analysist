@@ -1,5 +1,6 @@
 
-![alt text](sources/33c2bee189115cebc6f1e5104702a11b.png)
+![Research Analysist](sources/33c2bee189115cebc6f1e5104702a11b.png)
+
 # Research-Analysist
 
 Welcome to the Research-Analysist project! This project is designed to automate the process of web scraping and report generation, providing comprehensive research reports based on user-defined topics.
@@ -14,6 +15,7 @@ Welcome to the Research-Analysist project! This project is designed to automate 
 - [Detailed Workflow](#detailed-workflow)
 - [Agents and Their Roles](#agents-and-their-roles)
 - [Tasks and Their Execution](#tasks-and-their-execution)
+- [To-Do List](#to-do-list)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -25,7 +27,9 @@ The Research-Analysist project is divided into two main components:
 2. **Report Generation**: Generates comprehensive research reports based on the collected data.
 
 ## Architecture
-![alt text](sources/design.png)
+
+![Architecture](sources/design.png)
+
 ### Web Scraping and Data Collection
 
 - **Agents**: Handle specific tasks such as searching the web, scraping content, and generating follow-up questions.
@@ -98,180 +102,89 @@ The Research-Analysist project is divided into two main components:
 
 ### Web Scraping and Data Collection
 
-1. **Initialization**:
-   - Load environment variables and initialize agents.
-   - Users input their research topic in the `main_query` variable.
-
-2. **Main Query**:
-   - Perform an initial search using the `SearchAgent`.
-   - Retrieve top search results and extract URLs.
-
-3. **Follow-Up Questions**:
-   - Generate 10 follow-up questions based on the main query.
-   - Perform searches for each follow-up question and retrieve top results.
-
-4. **Scraping Content**:
-   - Asynchronously scrape content from the collected URLs using the `ScraperAgent`.
-   - Store the scraped content in `scraped_data.json`.
-
-5. **Data Management**:
-   - Manage the scraped content using the `DataManager`.
+| Step                | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| **Initialization**  | Load environment variables and initialize agents. Users input their research topic in the `main_query` variable. |
+| **Main Query**      | Perform an initial search using the `SearchAgent`. Retrieve top search results and extract URLs. |
+| **Follow-Up Questions** | Generate 10 follow-up questions based on the main query. Perform searches for each follow-up question and retrieve top results. |
+| **Scraping Content** | Asynchronously scrape content from the collected URLs using the `ScraperAgent`. Store the scraped content in `scraped_data.json`. |
+| **Data Management** | Manage the scraped content using the `DataManager`. |
 
 ### Report Generation
 
-1. **Initialization**:
-   - Load environment variables and initialize agents and tasks.
-
-2. **Reading Scraped Data**:
-   - Load the scraped data from `scraped_data.json`.
-
-3. **Generating Summary**:
-   - Generate a brief summary of the research data using the `SummaryAgent`.
-
-4. **Generating Index**:
-   - Generate a structured index of topics and subtopics using the `IndexAgent`.
-
-5. **Generating Detailed Content**:
-   - Generate detailed content for each main topic and subtopic using the `DetailAgent`.
-
-6. **Creating LaTeX Document**:
-   - Compile the generated content into a LaTeX document.
-
-7. **Generating PDF Report**:
-   - Convert the LaTeX document into a PDF report and upload it to an online platform.
+| Step                | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| **Initialization**  | Load environment variables and initialize agents and tasks.                 |
+| **Reading Scraped Data** | Load the scraped data from `scraped_data.json`.                          |
+| **Generating Summary** | Generate a brief summary of the research data using the `SummaryAgent`.    |
+| **Generating Index** | Generate a structured index of topics and subtopics using the `IndexAgent`. |
+| **Generating Detailed Content** | Generate detailed content for each main topic and subtopic using the `DetailAgent`. |
+| **Creating LaTeX Document** | Compile the generated content into a LaTeX document.                   |
+| **Generating PDF Report** | Convert the LaTeX document into a PDF report and upload it to an online platform. |
 
 ## Agents and Their Roles
 
 ### Web Scraping and Data Collection Agents
 
-1. **SearchAgent**:
-   - Performs web searches and generates follow-up questions.
-   - Uses the `EnhancedSerperDevTool` for performing searches.
-
-2. **ScraperAgent**:
-   - Extracts content from web pages asynchronously.
-   - Uses the `WebScraper` tool for scraping content.
-
-3. **ContextGeneratorAgent** (Not actively used in the current implementation):
-   - Synthesizes information from multiple sources and generates insightful analysis.
+| Agent                 | Role                                                                 |
+|-----------------------|----------------------------------------------------------------------|
+| **SearchAgent**       | Performs web searches and generates follow-up questions. Uses the `EnhancedSerperDevTool` for performing searches. |
+| **ScraperAgent**      | Extracts content from web pages asynchronously. Uses the `WebScraper` tool for scraping content. |
+| **ContextGeneratorAgent** | Synthesizes information from multiple sources and generates insightful analysis (Not actively used in the current implementation). |
 
 ### Report Generation Agents
 
-1. **IndexAgent**:
-   - Generates a structured index of topics and subtopics.
-
-2. **SummaryAgent**:
-   - Creates brief summaries for main topics.
-
-3. **DetailAgent**:
-   - Produces in-depth content for subtopics.
+| Agent                 | Role                                                                 |
+|-----------------------|----------------------------------------------------------------------|
+| **IndexAgent**        | Generates a structured index of topics and subtopics.                |
+| **SummaryAgent**      | Creates brief summaries for main topics.                             |
+| **DetailAgent**       | Produces in-depth content for subtopics.                             |
 
 ## Tasks and Their Execution
 
 ### Web Scraping and Data Collection Tasks
 
-1. **InitialSearchTask**:
-   - Performs an internet search for the main query and collects the top 5 results.
-
-2. **FollowUpSearchTask**:
-   - Performs an internet search for a follow-up question and collects the top 5 results.
-
-3. **ScrapingTasks**:
-   - Scrapes content from the given URLs and returns the text.
+| Task                  | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **InitialSearchTask** | Performs an internet search for the main query and collects the top 5 results. |
+| **FollowUpSearchTask** | Performs an internet search for a follow-up question and collects the top 5 results. |
+| **ScrapingTasks**     | Scrapes content from the given URLs and returns the text.                    |
 
 ### Report Generation Tasks
 
-1. **ContextTask**:
-   - Generates a structured index of main topics and subtopics based on the research data.
-
-2. **SummaryTask**:
-   - Generates a brief and concise summary for the main topic, including the subtopics.
-
-3. **DetailTask**:
-   - Produces detailed content for a subtopic on the main topic.
-
+| Task                  | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **ContextTask**       | Generates a structured index of main topics and subtopics based on the research data. |
+| **SummaryTask**       | Generates a brief and concise summary for the main topic, including the subtopics. |
+| **DetailTask**        | Produces detailed content for a subtopic on the main topic.                 |
 
 ## To-Do List
 
 ### Enhancements and Features
 
-1. **Make the Code More Modular**
-   - Refactor the existing code to improve modularity and separation of concerns.
-   - Break down large functions into smaller, reusable functions.
-   - Organize code into more granular modules and packages.
-
-2. **Add API Support**
-   - Develop a RESTful API to interact with the web scraping and report generation components.
-   - Implement endpoints for initiating web scraping, checking the status, and retrieving results.
-   - Use frameworks like Flask or FastAPI for the API implementation.
-
-3. **Add Email Server Support**
-   - Integrate an email server to send the generated PDF reports automatically.
-   - Configure SMTP settings and create email templates.
-   - Implement functionality to send emails with attachments.
-
-4. **Write Tests**
-   - Develop unit tests for all key components and functions.
-   - Use testing frameworks like `unittest` or `pytest`.
-   - Ensure high test coverage and include tests for edge cases.
-
-5. **Improve Error Handling**
-   - Enhance error handling mechanisms to provide more informative error messages.
-   - Implement retry logic for network-related operations.
-   - Log errors and exceptions for easier debugging and monitoring.
-
-6. **Add Logging**
-   - Integrate a logging framework to capture logs at various levels (info, debug, error).
-   - Configure log files and log rotation.
-   - Include logging in key parts of the code to track the flow and identify issues.
-
-7. **Optimize Performance**
-   - Analyze the performance of the web scraping and report generation components.
-   - Optimize the code to reduce execution time and resource usage.
-   - Implement caching mechanisms where appropriate.
-
-
-8. **Add Configuration Management**
-   - Use configuration management tools to manage environment variables and settings.
-   - Implement support for different environments (development, testing, production).
-   - Use tools like `configparser` or `pydantic` for managing configurations.
-
-9. **Add User Authentication**
-    - Implement user authentication for the API.
-    - Use OAuth2 or JWT for secure authentication.
-    - Manage user roles and permissions.
+| Task                    | Description                                                                 |
+|-------------------------|-----------------------------------------------------------------------------|
+| **Make the Code More Modular** | Refactor the existing code to improve modularity and separation of concerns. Break down large functions into smaller, reusable functions. Organize code into more granular modules and packages. |
+| **Add API Support**     | Develop a RESTful API to interact with the web scraping and report generation components. Implement endpoints for initiating web scraping, checking the status, and retrieving results. Use frameworks like Flask or FastAPI for the API implementation. |
+| **Add Email Server Support** | Integrate an email server to send the generated PDF reports automatically. Configure SMTP settings and create email templates. Implement functionality to send emails with attachments. |
+| **Write Tests**         | Develop unit tests for all key components and functions. Use testing frameworks like `unittest` or `pytest`. Ensure high test coverage and include tests for edge cases. |
+| **Improve Error Handling** | Enhance error handling mechanisms to provide more informative error messages. Implement retry logic for network-related operations. Log errors and exceptions for easier debugging and monitoring. |
+| **Add Logging**         | Integrate a logging framework to capture logs at various levels (info, debug, error). Configure log files and log rotation. Include logging in key parts of the code to track the flow and identify issues. |
+| **Optimize Performance** | Analyze the performance of the web scraping and report generation components. Optimize the code to reduce execution time and resource usage. Implement caching mechanisms where appropriate. |
+| **Enhance Documentation** | Expand the README.md with more detailed usage instructions and examples. Create additional documentation for developers, including code comments and docstrings. Provide a comprehensive guide for setting up and running the project. |
+| **Add Configuration Management** | Use configuration management tools to manage environment variables and settings. Implement support for different environments (development, testing, production). Use tools like `configparser` or `pydantic` for managing configurations. |
+| **Add User Authentication** | Implement user authentication for the API. Use OAuth2 or JWT for secure authentication. Manage user roles and permissions. |
 
 ### Already Done
 
-1. **Web Scraping and Data Collection**
-   - Implemented `SearchAgent` to perform web searches.
-   - Implemented `ScraperAgent` to scrape content from web pages asynchronously.
-   - Generated follow-up questions based on the main query.
-   - Stored scraped content in `scraped_data.json`.
-
-2. **Report Generation**
-   - Implemented `IndexAgent` to generate a structured index of topics and subtopics.
-   - Implemented `SummaryAgent` to create brief summaries for main topics.
-   - Implemented `DetailAgent` to produce in-depth content for subtopics.
-   - Compiled generated content into a LaTeX document.
-   - Converted LaTeX document into a PDF report.
-   - Uploaded PDF report to an online platform for sharing and collaboration.
-
-3. **Environment Setup**
-   - Loaded environment variables using `dotenv`.
-   - Configured the system based on values defined in the `.env` file.
-
-4. **Agents and Tasks Initialization**
-   - Initialized agents and tasks for both web scraping and report generation components.
-
-5. **Data Management**
-   - Managed scraped content using the `DataManager`.
-   - Ensured data is stored correctly and saved in `scraped_data.json`.
-
-6. **Basic Error Handling**
-   - Implemented basic error handling for network-related operations.
-   - Provided informative error messages for common issues.
-
+| Task                    | Description                                                                 |
+|-------------------------|-----------------------------------------------------------------------------|
+| **Web Scraping and Data Collection** | Implemented `SearchAgent` to perform web searches. Implemented `ScraperAgent` to scrape content from web pages asynchronously. Generated follow-up questions based on the main query. Stored scraped content in `scraped_data.json`. |
+| **Report Generation**   | Implemented `IndexAgent` to generate a structured index of topics and subtopics. Implemented `SummaryAgent` to create brief summaries for main topics. Implemented `DetailAgent` to produce in-depth content for subtopics. Compiled generated content into a LaTeX document. Converted LaTeX document into a PDF report. Uploaded PDF report to an online platform for sharing and collaboration. |
+| **Environment Setup**   | Loaded environment variables using `dotenv`. Configured the system based on values defined in the `.env` file. |
+| **Agents and Tasks Initialization** | Initialized agents and tasks for both web scraping and report generation components. |
+| **Data Management**     | Managed scraped content using the `DataManager`. Ensured data is stored correctly and saved in `scraped_data.json`. |
+| **Basic Error Handling** | Implemented basic error handling for network-related operations. Provided informative error messages for common issues. |
 
 ## Contributing
 
