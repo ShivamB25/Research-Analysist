@@ -157,34 +157,37 @@ The Research-Analysist project is divided into two main components:
 | **ContextTask**       | Generates a structured index of main topics and subtopics based on the research data. |
 | **SummaryTask**       | Generates a brief and concise summary for the main topic, including the subtopics. |
 | **DetailTask**        | Produces detailed content for a subtopic on the main topic.                 |
+Certainly! Below is a more concise version of the To-Do List section.
+
+---
 
 ## To-Do List
 
 ### Enhancements and Features
 
-| Task                    | Description                                                                 |
-|-------------------------|-----------------------------------------------------------------------------|
-| **Make the Code More Modular** | Refactor the existing code to improve modularity and separation of concerns. Break down large functions into smaller, reusable functions. Organize code into more granular modules and packages. |
-| **Add API Support**     | Develop a RESTful API to interact with the web scraping and report generation components. Implement endpoints for initiating web scraping, checking the status, and retrieving results. Use frameworks like Flask or FastAPI for the API implementation. |
-| **Add Email Server Support** | Integrate an email server to send the generated PDF reports automatically. Configure SMTP settings and create email templates. Implement functionality to send emails with attachments. |
-| **Write Tests**         | Develop unit tests for all key components and functions. Use testing frameworks like `unittest` or `pytest`. Ensure high test coverage and include tests for edge cases. |
-| **Improve Error Handling** | Enhance error handling mechanisms to provide more informative error messages. Implement retry logic for network-related operations. Log errors and exceptions for easier debugging and monitoring. |
-| **Add Logging**         | Integrate a logging framework to capture logs at various levels (info, debug, error). Configure log files and log rotation. Include logging in key parts of the code to track the flow and identify issues. |
-| **Optimize Performance** | Analyze the performance of the web scraping and report generation components. Optimize the code to reduce execution time and resource usage. Implement caching mechanisms where appropriate. |
-| **Enhance Documentation** | Expand the README.md with more detailed usage instructions and examples. Create additional documentation for developers, including code comments and docstrings. Provide a comprehensive guide for setting up and running the project. |
-| **Add Configuration Management** | Use configuration management tools to manage environment variables and settings. Implement support for different environments (development, testing, production). Use tools like `configparser` or `pydantic` for managing configurations. |
-| **Add User Authentication** | Implement user authentication for the API. Use OAuth2 or JWT for secure authentication. Manage user roles and permissions. |
+| Task                          | Description                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------|
+| **Modularize Code**           | Refactor code for better modularity and separation of concerns.             |
+| **Add API Support**           | Develop a RESTful API for web scraping and report generation.               |
+| **Email Server Integration**  | Integrate an email server to send generated PDF reports automatically.      |
+| **Write Tests**               | Develop unit tests for all key components and functions.                    |
+| **Improve Error Handling**    | Enhance error handling and implement retry logic.                           |
+| **Add Logging**               | Integrate logging framework for better tracking and debugging.              |
+| **Optimize Performance**      | Analyze and optimize performance, including caching mechanisms.             |
+| **Enhance Documentation**     | Expand README and add detailed usage instructions and examples.             |
+| **Configuration Management**  | Use tools to manage environment variables and settings.                     |
+| **User Authentication**       | Implement user authentication using OAuth2 or JWT.                         |
 
 ### Already Done
 
-| Task                    | Description                                                                 |
-|-------------------------|-----------------------------------------------------------------------------|
-| **Web Scraping and Data Collection** | Implemented `SearchAgent` to perform web searches. Implemented `ScraperAgent` to scrape content from web pages asynchronously. Generated follow-up questions based on the main query. Stored scraped content in `scraped_data.json`. |
-| **Report Generation**   | Implemented `IndexAgent` to generate a structured index of topics and subtopics. Implemented `SummaryAgent` to create brief summaries for main topics. Implemented `DetailAgent` to produce in-depth content for subtopics. Compiled generated content into a LaTeX document. Converted LaTeX document into a PDF report. Uploaded PDF report to an online platform for sharing and collaboration. |
-| **Environment Setup**   | Loaded environment variables using `dotenv`. Configured the system based on values defined in the `.env` file. |
-| **Agents and Tasks Initialization** | Initialized agents and tasks for both web scraping and report generation components. |
-| **Data Management**     | Managed scraped content using the `DataManager`. Ensured data is stored correctly and saved in `scraped_data.json`. |
-| **Basic Error Handling** | Implemented basic error handling for network-related operations. Provided informative error messages for common issues. |
+| Task                          | Description                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------|
+| **Web Scraping**              | Implemented `SearchAgent` and `ScraperAgent` for web searches and scraping. |
+| **Report Generation**         | Created agents for index generation, summaries, and detailed content.       |
+| **Environment Setup**         | Configured environment variables using `dotenv`.                            |
+| **Agents and Tasks Initialization** | Initialized agents and tasks for both components.                  |
+| **Data Management**           | Managed and stored scraped content using `DataManager`.                     |
+| **Basic Error Handling**      | Implemented basic error handling for network operations.                    |
 
 ## Contributing
 
