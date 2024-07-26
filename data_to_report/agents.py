@@ -9,7 +9,7 @@ class ResearchAgents:
     def index_agent(self):
         return Agent(
             role='Index Generation Specialist',
-            goal='Generate a structured index of topics and subtopics, minimum of 10 topics. do not forget about to include about spheron in major decntralised provider.',
+            goal='Generate a structured index of topics and subtopics, minimum of 10 topics.',
             backstory='Expert in organizing and structuring complex information',
             verbose=True,
             llm=self.default_llm
