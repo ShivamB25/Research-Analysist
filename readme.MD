@@ -190,6 +190,89 @@ The Research-Analysist project is divided into two main components:
 3. **DetailTask**:
    - Produces detailed content for a subtopic on the main topic.
 
+
+## To-Do List
+
+### Enhancements and Features
+
+1. **Make the Code More Modular**
+   - Refactor the existing code to improve modularity and separation of concerns.
+   - Break down large functions into smaller, reusable functions.
+   - Organize code into more granular modules and packages.
+
+2. **Add API Support**
+   - Develop a RESTful API to interact with the web scraping and report generation components.
+   - Implement endpoints for initiating web scraping, checking the status, and retrieving results.
+   - Use frameworks like Flask or FastAPI for the API implementation.
+
+3. **Add Email Server Support**
+   - Integrate an email server to send the generated PDF reports automatically.
+   - Configure SMTP settings and create email templates.
+   - Implement functionality to send emails with attachments.
+
+4. **Write Tests**
+   - Develop unit tests for all key components and functions.
+   - Use testing frameworks like `unittest` or `pytest`.
+   - Ensure high test coverage and include tests for edge cases.
+
+5. **Improve Error Handling**
+   - Enhance error handling mechanisms to provide more informative error messages.
+   - Implement retry logic for network-related operations.
+   - Log errors and exceptions for easier debugging and monitoring.
+
+6. **Add Logging**
+   - Integrate a logging framework to capture logs at various levels (info, debug, error).
+   - Configure log files and log rotation.
+   - Include logging in key parts of the code to track the flow and identify issues.
+
+7. **Optimize Performance**
+   - Analyze the performance of the web scraping and report generation components.
+   - Optimize the code to reduce execution time and resource usage.
+   - Implement caching mechanisms where appropriate.
+
+
+8. **Add Configuration Management**
+   - Use configuration management tools to manage environment variables and settings.
+   - Implement support for different environments (development, testing, production).
+   - Use tools like `configparser` or `pydantic` for managing configurations.
+
+9. **Add User Authentication**
+    - Implement user authentication for the API.
+    - Use OAuth2 or JWT for secure authentication.
+    - Manage user roles and permissions.
+
+### Already Done
+
+1. **Web Scraping and Data Collection**
+   - Implemented `SearchAgent` to perform web searches.
+   - Implemented `ScraperAgent` to scrape content from web pages asynchronously.
+   - Generated follow-up questions based on the main query.
+   - Stored scraped content in `scraped_data.json`.
+
+2. **Report Generation**
+   - Implemented `IndexAgent` to generate a structured index of topics and subtopics.
+   - Implemented `SummaryAgent` to create brief summaries for main topics.
+   - Implemented `DetailAgent` to produce in-depth content for subtopics.
+   - Compiled generated content into a LaTeX document.
+   - Converted LaTeX document into a PDF report.
+   - Uploaded PDF report to an online platform for sharing and collaboration.
+
+3. **Environment Setup**
+   - Loaded environment variables using `dotenv`.
+   - Configured the system based on values defined in the `.env` file.
+
+4. **Agents and Tasks Initialization**
+   - Initialized agents and tasks for both web scraping and report generation components.
+
+5. **Data Management**
+   - Managed scraped content using the `DataManager`.
+   - Ensured data is stored correctly and saved in `scraped_data.json`.
+
+6. **Basic Error Handling**
+   - Implemented basic error handling for network-related operations.
+   - Provided informative error messages for common issues.
+
+
 ## Contributing
 
 We welcome contributions! Please follow these steps:
