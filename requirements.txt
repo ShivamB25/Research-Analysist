@@ -1,0 +1,14 @@
+crewAI
+langchain
+langchain-community
+openai
+pandas
+matplotlib
+seaborn
+pylatex
+python-dotenv
+firecrawl-py
+crewai[tools]
+aiohttp
+beautifulsoup4
+pyupload
