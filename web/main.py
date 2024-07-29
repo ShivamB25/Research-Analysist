@@ -19,6 +19,10 @@ def custom_print(*args, **kwargs):
     print(*args, **kwargs, file=output_buffer)
     print(*args, **kwargs)  # Still print to console
 
+def extract_urls(text):
+    link_pattern = re.compile(r'https?://[^\s,\'")]+')
+    return link_pattern.findall(text)
+
 async def main():
     # Initialize agents
     search_agent = SearchAgent()
@@ -28,16 +32,19 @@ async def main():
     data_manager = DataManager()
 
     # Get main query
-    main_query = "decentralised gpu network" ## replace with topic you want to disucss
+    main_query = "decentralised gpu network" ## replace with topic you want to discuss
+
+    all_links = set()  # Use a set to automatically handle duplicates
 
     # Perform initial search
     initial_search_results = search_agent.search(main_query)
-    initial_urls = [item['link'] for item in initial_search_results if 'link' in item]
+    initial_urls = extract_urls(str(initial_search_results))
     
-    # Print initial URLs
+    # Print initial URLs and add to all_links
     custom_print("Initial search URLs:")
     for url in initial_urls:
         custom_print(url)
+        all_links.add(url)
 
     # Generate follow-up questions
     follow_up_questions = search_agent.generate_follow_up_questions(main_query)
@@ -46,24 +53,19 @@ async def main():
     for i, question in enumerate(follow_up_questions):
         custom_print(f"\nFollow-up question {i+1}: {question}")
         results = search_agent.search(question)
-        urls = [item['link'] for item in results if 'link' in item][:10]  # Limit to top 10 results
+        
+        # Use regex to extract URLs from the search results
+        urls = extract_urls(str(results))[:10]  # Limit to top 10 results
+        
         custom_print("URLs:")
         for url in urls:
             custom_print(url)
+            all_links.add(url)
 
     custom_print("\nSearch process completed.")
 
-    # Get the captured output
-    text_output = output_buffer.getvalue()
-
-    # Regular expression to capture links
-    link_pattern = re.compile(r'https?://[^\s,\'")]+')
-
-    # Find all links in the text
-    links = link_pattern.findall(text_output)
-
-    # Remove duplicates by converting the list to a set and back to a list
-    unique_links = list(set(links))
+    # Convert set to list
+    unique_links = list(all_links)
 
     # Store the links in a JSON file
     with open('links.json', 'w') as json_file:

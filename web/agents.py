@@ -1,9 +1,11 @@
 # agents.py
-
+import asyncio
+import aiohttp
 from crewai import Agent, Task
 from tools import search_tool, scrape_tool
 from langchain_openai import ChatOpenAI
 from crewai_tools import BaseTool
+from bs4 import BeautifulSoup 
 class SearchAgent:
     def __init__(self):
         self.agent = Agent(
