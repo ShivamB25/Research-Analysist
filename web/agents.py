@@ -3,7 +3,7 @@
 from crewai import Agent, Task
 from tools import search_tool, scrape_tool
 from langchain_openai import ChatOpenAI
-
+from crewai_tools import BaseTool
 class SearchAgent:
     def __init__(self):
         self.agent = Agent(
