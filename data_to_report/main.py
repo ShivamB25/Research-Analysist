@@ -1,4 +1,3 @@
-
 import json
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -23,6 +22,9 @@ class ResearchReportCrew:
         json_match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
         if json_match:
             return json_match.group(1)
+        json_match = re.search(r'({.*})', text, re.DOTALL)
+        if json_match:
+            return json_match.group(1)
         return None
 
     def run(self):
@@ -38,38 +40,39 @@ class ResearchReportCrew:
             verbose=True
         )
 
-        # Generaete summary of the the resarch data 
+        # Generate summary of the research data 
         ssmx_task = self.tasks.create_simple_summary_context(self.agents.summary_agent(), research_data)
         crew.tasks = [ssmx_task]
         ssmx_result = crew.kickoff()
         ssmx_result = str(ssmx_result)
         ssmx_result = ssmx_result.strip()
-        summary_of_resarch_result = ssmx_result.replace("\n", " ")
+        summary_of_research_result = ssmx_result.replace("\n", " ")
 
         # Generate index structure
         print("Generating index structure...")
-        index_task = self.tasks.index_generation_task(self.agents.index_agent(), research_data, summary_of_resarch_result)
+        index_task = self.tasks.index_generation_task(self.agents.index_agent(), research_data, summary_of_research_result)
         crew.tasks = [index_task]
         index_result = crew.kickoff()
         
-        #print("## INDEXZ")
-        #print(index_result)
-        #print("###########")
-
-        #json_str = self.extract_json(str(index_result))
-
-        #print("########")
-        #print(json_str)
-        #print("##########")
-
         try:
             jsox_string = str(index_result)
             index_structure = json.loads(jsox_string)
-        except:
-            print("## Error at Prasing JSON:")
-            print(jsox_string)
-            print("###")
-            raise ValueError("Could not extract JSON from the index result")
+        except json.JSONDecodeError:
+            print("## Error parsing JSON. Attempting to extract JSON with regex...")
+            jsox_string = self.extract_json(jsox_string)
+            if jsox_string:
+                try:
+                    index_structure = json.loads(jsox_string)
+                except json.JSONDecodeError:
+                    print("## Error at parsing JSON after regex extraction:")
+                    print(jsox_string)
+                    print("###")
+                    raise ValueError("Could not extract JSON from the index result")
+            else:
+                print("## Error at extracting JSON with regex:")
+                print(jsox_string)
+                print("###")
+                raise ValueError("Could not extract JSON from the index result")
 
         # Generate content
         print("Generating content...")

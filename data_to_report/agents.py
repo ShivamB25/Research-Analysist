@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 # base_url = os.getenv('OLLAMA_BASE_URL')
-llm2 = ChatOllama(model="mistral-nemo:12b",
-                  base_url="http://100.72.0.1:11434",
+llm2 = ChatOllama(model="mistral-nemo:latest",
+                  base_url="http://provider.demeters.io:32017",
                   temperature=0.4,max_tokens=4096)
 class ResearchAgents:
     def __init__(self):

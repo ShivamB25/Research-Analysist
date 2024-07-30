@@ -32,7 +32,7 @@ async def main():
     data_manager = DataManager()
 
     # Get main query
-    main_query = "decentralised gpu network" ## replace with topic you want to discuss
+    main_query = "Spheron Network" ## replace with topic you want to discuss
 
     all_links = set()  # Use a set to automatically handle duplicates
 
