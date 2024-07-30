@@ -143,7 +143,7 @@ class ResearchReportCrew:
         return doc
 
 if __name__ == "__main__":
-    data_source = 'research_data.txt'
+    data_source = 'scraped_data.json'
     research_crew = ResearchReportCrew(data_source)
     result = research_crew.run()
     print(result)

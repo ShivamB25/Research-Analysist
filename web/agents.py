@@ -1,11 +1,24 @@
 # agents.py
 import asyncio
 import aiohttp
+from dotenv import load_dotenv
+import os
 from crewai import Agent, Task
 from tools import search_tool, scrape_tool
 from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM
 from crewai_tools import BaseTool
 from bs4 import BeautifulSoup 
+from langchain_community.chat_models import ChatOllama
+
+load_dotenv()
+base_url = os.getenv('OLLAMA_BASE_URL')
+# llm2 = ChatOllama(model="llama3.1:8b",
+#                   base_url=base_url,
+#                   temperature=0.4)
+llm2 = ChatOllama(model="command-r-plus:104b",
+                  base_url=base_url,
+                  temperature=0.4)
 class SearchAgent:
     def __init__(self):
         self.agent = Agent(
@@ -14,7 +27,8 @@ class SearchAgent:
             backstory='Expert at using search engines to find relevant information and generating insightful questions',
             tools=[search_tool],
             verbose=True,
-            llm=ChatOpenAI(model_name="gpt-4o-mini", temperature=0.4)
+            # llm=llm2
+           llm=ChatOpenAI(model_name="gpt-4o", temperature=0.4)
         )
 
     def search(self, query):
@@ -40,7 +54,7 @@ class ContextGeneratorAgent:
             goal='Generate comprehensive context from scraped data',
             backstory='Expert at synthesizing information from multiple sources and generating insightful analysis',
             verbose=True,
-            llm=ChatOpenAI(model_name="gpt-4o-mini", temperature=0.7)
+            llm=ChatOllama(model="llama3.1:8b",base_url=base_url,temperature=0.7)
         )
 
     def generate_context(self, data):
@@ -58,7 +72,8 @@ class ScraperAgent:
             backstory='Skilled at parsing HTML and extracting summarised . short and concise,only useful to the topic, not extra stuff like html, u can be as less as possible',
             tools=[scrape_tool],
             verbose=True,
-            llm=ChatOpenAI(model_name="gpt-4o-mini", temperature=0.4, max_tokens=500),
+            # llm=ChatOpenAI(model_name="gpt-4o-mini", temperature=0.4, max_tokens=500),
+            llm=ChatOllama(model="llama3.1:8b",base_url=base_url,temperature=0.4,max_tokens=500),
             
         )
 
